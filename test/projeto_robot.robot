@@ -4,14 +4,11 @@ Library    SeleniumLibrary
 Test Setup    Open Browser    browser=edge
 *** Variables ***
 ${URL}    https://www.saucedemo.com/
-${BROWSER}    edge
-${USERNAME}    standard_user
-${PASSWORD}    secret_sauce
 
 *** Test Cases ***
 Successful Login
     I navigate to the login page     ${URL}   
-    Input correct credentials    ${USERNAME}    ${PASSWORD}    
+    Input correct credentials       
     I click on the login button
     i am able view the home page
 
@@ -19,19 +16,19 @@ Unsuccessful Login - No credentials
     I navigate to the login page    ${URL}
     Input No credentials
     I click on the login button
-    i am able view the Class Error Message    Epic sadface: Username is required
+    i am able view the Class Error Message for no credentials
 Unsuccessful Login - No Password
     I navigate to the login page     ${URL}
-    Input correct Username    ${USERNAME}
+    Input correct Username
     I click on the login button
-    i am able view the Class Error Message    Epic sadface: Password is required
+    i am able view the Class Error Message for no password
 Unsuccessful Login - No Username
     I navigate to the login page     ${URL}
-    Input correct Password    ${PASSWORD}
+    Input correct Password
     I click on the login button
-    i am able view the Class Error Message    Epic sadface: Username is required
+    i am able view the Class Error Message for no username
 Unsuccessful Login - Wrong credentials
    I navigate to the login page     ${URL}
-    Input wrong credentials    WrongU    WrongP
+    Input wrong credentials
     I click on the login button
-    i am able view the Class Error Message    Epic sadface: Username and password do not match any user in this service
+    i am able view the Class Error Message for wrong credentials
