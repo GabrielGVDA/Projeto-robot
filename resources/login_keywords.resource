@@ -1,11 +1,11 @@
 *** Settings ***
-Library    SeleniumLibrary
+Library    SeleniumLibrary    
 Variables    ../variables/variables.py
+
 
 *** Keywords ***
 I navigate to the login page
-    [Arguments]    ${URL}
-    Go To    ${URL}
+    Go To    ${URLE_DATA["baseUrl"]}
 Input correct credentials
     Wait Until Element Is Visible    id=user-name
     Input Text    id=user-name    ${LOGIN_DATA["correctData"]["username"]}
@@ -22,9 +22,11 @@ Input wrong credentials
     Input Text    id=password    ${LOGIN_DATA["wrongData"]["password"]}
 I click on the login button
     Click Button    id=login-button
-i am able view the home page
-     ${location}    Get location
-    Should Be Equal    ${location}    https://www.saucedemo.com/inventory.html
+
+I am able to view the home page 
+    ${location}    Get location 
+    ${full_url}    Catenate     SEPARATOR=    ${URLE_DATA["baseUrl"]}     ${URLE_DATA["inventoryUrl"]} 
+    Should Be Equal    ${location}    ${full_url}
 Input No credentials
       Wait Until Element Is Visible    id=user-name
 
